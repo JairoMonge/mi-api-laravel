@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MensajeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/enviar-mensaje', [MensajeController::class, 'enviarMensaje']);
+
 

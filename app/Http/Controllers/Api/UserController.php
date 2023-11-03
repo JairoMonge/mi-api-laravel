@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserControler extends Controller
+class UserController extends Controller
 {
     public function register(Request $request){
         $request->validate([
@@ -25,8 +25,9 @@ class UserControler extends Controller
         $user->save();
 
         return response()->json([
-            "status" => 1,
-            "msg" => "Usuario Registrado"
+            "status" => 'Ok',
+            "status_code" => 200,
+            "message" => "User Created"
         ]);
     }
 
@@ -43,28 +44,30 @@ class UserControler extends Controller
             $token = $user->createToken("auth_token")->plainTextToken;
 
             return response()->json([
-                "status" => 1,
-                "msg" => "Usuario Logueado",
+                "status" => 'Ok',
+                "status_code" => 200,
+                "message" => "authenticated user",
                 "access_token" => $token
               ]);
           }else{
             return response()->json([
-                "status" => 0,
-                "msg" => "Contraseña Incorrecta",
+                "status" => 'Error',
+                "message" => "Incorrect password",
               ], 404);
           }
        }else{
           return response()->json([
-            "status" => 0,
-            "msg" => "Usuario no registrado",
+                "status" => 'Error',
+                "message" => "Incorrect User",
           ], 404);
        }
     }
 
     public function home(){
         return response()->json([
-            "status" => 0,
-            "msg" => "Data de Home",
+            "status" => 'Ok',
+            "status_code" => 200,
+            "message" => "Data Home",
             "data" => auth()->user()
           ]);
     }
@@ -72,8 +75,9 @@ class UserControler extends Controller
     public function logout(){
         auth()->user()->tokens()->delete();
         return response()->json([
-            "status" => 1,
-            "msg" => "Sesión Finalizada",
+            "status" => "Ok",
+            "status_code" => 200,
+            "message" => "Session Ended",
             
           ]);
     }

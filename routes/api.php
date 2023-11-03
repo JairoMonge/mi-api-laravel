@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\UserControler;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\MensajeController;
 
 use App\Http\Controllers\Controller;
@@ -11,13 +11,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', [UserControler::class, 'register']);
-Route::post('login', [UserControler::class, 'login']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function(){
     //rutas
-    Route::get('home', [UserControler::class, 'home']);
-    Route::get('logout', [UserControler::class, 'logout']);
+    Route::get('home', [UserController::class, 'home']);
+    Route::get('logout', [UserController::class, 'logout']);
 });
 
 Route::get('/enviar-mensaje', [MensajeController::class, 'enviarMensaje']);
